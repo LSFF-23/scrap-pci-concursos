@@ -23,6 +23,9 @@ class FetchPCI:
     
         return divs_between
     
+    def get_string (self, s: Tag):
+        return s.decode_contents().strip().replace('<br/>', '\n').replace('<span>', '').replace('</span>','')
+    
     def _getData (self):
         div_data = self._getDivs()
         result = []
@@ -33,7 +36,7 @@ class FetchPCI:
             k_result["pci_link"] = element.select_one(".ca > a").get("href")
             k_result["pb_icon"] = element.select_one(".cb > img").get("data-src")
             k_result["location"] = element.select_one(".cc").text
-            k_result["additional_info"] = element.select_one(".cd").decode_contents().strip()
+            k_result["additional_info"] = self.get_string(element.select_one(".cd"))
             k_result["enrolment_upto"] = element.select_one(".ce > span").text
             result.append(k_result)
 
