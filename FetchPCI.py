@@ -85,4 +85,4 @@ if __name__ == "__main__":
             sb.fetch_data()
         except Exception as e:
             logging.info(repr(e))
-        time.sleep(60)
+        time.sleep(10)
