@@ -80,6 +80,9 @@ class FetchPCI:
 
 if __name__ == "__main__":
     sb = FetchPCI("https://www.pciconcursos.com.br/concursos/nordeste/", {"id": "MA"}, {"id": "PB"})
-    db = sb._getData()
-    sb.fetch_data()
-    print("Done")
+    while True:
+        try:
+            sb.fetch_data()
+        except Exception as e:
+            logging.info(repr(e))
+        time.sleep(60)
