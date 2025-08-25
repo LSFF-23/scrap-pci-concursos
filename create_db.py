@@ -7,7 +7,7 @@ cursor = conn.cursor()
 # create table
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS news (
-    news_id INTEGER PRIMARY KEY,
+    news_id INTEGER PRIMARY KEY AUTOINCREMENT,
     public_body TEXT,
     pci_link TEXT,
     pb_icon TEXT,
