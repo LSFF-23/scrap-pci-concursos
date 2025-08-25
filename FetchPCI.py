@@ -7,7 +7,6 @@ import requests
 import sqlite3
 import logging
 import time
-import socket
 
 logging.basicConfig(
     level=logging.INFO,
@@ -80,11 +79,8 @@ class FetchPCI:
 
 
 if __name__ == "__main__":
-    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.bind(("0.0.0.0", 3000))
     sb = FetchPCI("https://www.pciconcursos.com.br/concursos/nordeste/", {"id": "MA"}, {"id": "PB"})
     while True:
-        server_socket.listen(1)
         try:
             sb.fetch_data()
         except Exception as e:
