@@ -67,11 +67,11 @@ class FetchPCI:
         
         data = self._getData()
         for d in data:
-            self.cursor.execute(f"SELECT * FROM news WHERE pci_link=?", (d["pci_link"].replace("'", "''").strip(), ))
+            self.cursor.execute(f"SELECT * FROM news WHERE pci_link=?", (d['pci_link'].replace("'", "''").strip(), ))
             row = self.cursor.fetchone()
             if (not row):
                 self.cursor.execute("INSERT INTO news (public_body, pci_link, pb_icon, location, additional_info, enrolment_upto) VALUES (?, ?, ?, ?, ?, ?)", tuple(d.values()))
-                messages.append(f"*{d["public_body"]}*\n\n{d["additional_info"]}\n\nInscrições até: {d["enrolment_upto"]}\n\nMais informações em: {d["pci_link"]}")
+                messages.append(f"*{d['public_body']}*\n\n{d['additional_info']}\n\nInscrições até: {d['enrolment_upto']}\n\nMais informações em: {d['pci_link']}")
                 #logging.info(f"*{d["public_body"]}*\n\n_{d["additional_info"]}_\n\nInscrições até: {d["enrolment_upto"]}\n\nMais informações em: {d["pci_link"]}\n\n")
         
         self.conn.commit()
