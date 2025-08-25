@@ -80,7 +80,8 @@ class FetchPCI:
 
 
 if __name__ == "__main__":
-    socket.bind(("0.0.0.0", 3000))
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.bind(("0.0.0.0", 3000))
     sb = FetchPCI("https://www.pciconcursos.com.br/concursos/nordeste/", {"id": "MA"}, {"id": "PB"})
     while True:
         try:
