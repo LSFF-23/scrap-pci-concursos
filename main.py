@@ -4,8 +4,7 @@ import time
 import logging
 
 sb = FetchPCI("https://www.pciconcursos.com.br/concursos/nordeste/", {"id": "MA"}, {"id": "PB"})
-while True:
-    try:
-        logging.info(sb.fetch_data())
-    except Exception as e:
-        logging.info(repr(e))
+try:
+    logging.info(sb.fetch_data())
+except Exception as e:
+    logging.info(repr(e))
