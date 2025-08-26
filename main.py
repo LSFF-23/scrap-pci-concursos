@@ -3,10 +3,11 @@ from FetchPCI import FetchPCI
 import logging
 import os
 import sqlite3
+import time
 
-db_file = "news.db"
+DB_FILE = "news.db"
 
-if not os.path.isfile(db_file):
+if not os.path.isfile(DB_FILE):
     conn = sqlite3.connect("news.db")
     cursor = conn.cursor()
     cursor.execute("""
@@ -23,8 +24,10 @@ if not os.path.isfile(db_file):
     conn.commit()
     conn.close()
 
-fp = FetchPCI("https://www.pciconcursos.com.br/concursos/nordeste/", {"id": "MA"}, {"id": "PB"}, db_file)
-try:
-    logging.info(fp.fetch_data())
-except Exception as e:
-    logging.info(repr(e))
+fp = FetchPCI("https://www.pciconcursos.com.br/concursos/nordeste/", {"id": "MA"}, {"id": "PB"}, DB_FILE)
+while True:
+    try:
+        logging.info(fp.fetch_data())
+    except Exception as e:
+        logging.info(repr(e))
+    time.sleep(60)
