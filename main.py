@@ -9,4 +9,3 @@ while True:
         logging.info(sb.fetch_data())
     except Exception as e:
         logging.info(repr(e))
-    time.sleep(60)
