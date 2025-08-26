@@ -1,4 +1,6 @@
 news.db
+discloud.config
+*.zip
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

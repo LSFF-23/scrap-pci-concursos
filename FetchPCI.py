@@ -7,16 +7,6 @@ import requests
 import sqlite3
 import logging
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="[%(asctime)s [%(levelname)s] %(message)s]\n\n",
-    encoding="utf-8",
-    handlers=[
-        logging.FileHandler("logs.log"),
-        logging.StreamHandler()
-    ]
-)
-
 class FetchPCI:
     def __init__ (self, url, start, end, db_file):
         self.conn = sqlite3.connect(db_file)

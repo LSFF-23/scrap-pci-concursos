@@ -7,6 +7,16 @@ import time
 
 DB_FILE = "news.db"
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="[%(asctime)s [%(levelname)s] %(message)s] ",
+    encoding="utf-8",
+    handlers=[
+        logging.FileHandler("logs.log"),
+        logging.StreamHandler()
+    ]
+)
+
 if not os.path.isfile(DB_FILE):
     conn = sqlite3.connect("news.db")
     cursor = conn.cursor()
