@@ -6,7 +6,6 @@ from SendMessage import SendMessage
 import requests
 import sqlite3
 import logging
-import time
 
 logging.basicConfig(
     level=logging.INFO,
@@ -19,8 +18,8 @@ logging.basicConfig(
 )
 
 class FetchPCI:
-    def __init__ (self, url, start, end):
-        self.conn = sqlite3.connect("news.db")
+    def __init__ (self, url, start, end, db_file):
+        self.conn = sqlite3.connect(db_file)
         self.cursor = self.conn.cursor()
 
         self.url = url
@@ -72,18 +71,7 @@ class FetchPCI:
             if (not row):
                 self.cursor.execute("INSERT INTO news (public_body, pci_link, pb_icon, location, additional_info, enrolment_upto) VALUES (?, ?, ?, ?, ?, ?)", tuple(d.values()))
                 messages.append(f"*{d['public_body']}*\n\n{d['additional_info']}\n\nInscrições até: {d['enrolment_upto']}\n\nMais informações em: {d['pci_link']}")
-                #logging.info(f"*{d["public_body"]}*\n\n_{d["additional_info"]}_\n\nInscrições até: {d["enrolment_upto"]}\n\nMais informações em: {d["pci_link"]}\n\n")
         
-        if not messages: return "Nothing to send."
+        if not messages: return "There's nothing."
         self.conn.commit()
         return client.send("\n\n".join(messages))
-
-
-if __name__ == "__main__":
-    sb = FetchPCI("https://www.pciconcursos.com.br/concursos/nordeste/", {"id": "MA"}, {"id": "PB"})
-    while True:
-        try:
-            logging.info(sb.fetch_data())
-        except Exception as e:
-            logging.info(repr(e))
-        time.sleep(60)
