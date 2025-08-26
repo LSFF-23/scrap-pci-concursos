@@ -5,7 +5,6 @@ from SendMessage import SendMessage
 
 import requests
 import sqlite3
-import logging
 
 class FetchPCI:
     def __init__ (self, url, start, end, db_file):

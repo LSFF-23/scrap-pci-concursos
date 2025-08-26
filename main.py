@@ -9,7 +9,7 @@ DB_FILE = "news.db"
 
 logging.basicConfig(
     level=logging.INFO,
-    format="[%(asctime)s [%(levelname)s] %(message)s] ",
+    format="[%(levelname)s] [%(asctime)s] : %(message)s",
     encoding="utf-8",
     handlers=[
         logging.FileHandler("logs.log"),
